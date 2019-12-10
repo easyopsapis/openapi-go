@@ -160,3 +160,36 @@ func Test_transport_RoundTrip(t1 *testing.T) {
 		})
 	}
 }
+
+func TestNewTransport(t *testing.T) {
+	type args struct {
+		accessKey string
+		secretKey string
+		options   []TransportOption
+	}
+	tests := []struct {
+		name string
+		args args
+		want http.RoundTripper
+	}{
+		{
+			args: args{
+				accessKey: "3fc93fed595063856df3ee1a",
+				secretKey: "1e338744a33426b3394e0ae9cd45af9c4e0d5fee5aad497e969cd21c65963d36",
+				options:   []TransportOption{RoundTripper(http.DefaultTransport)},
+			},
+			want: &transport{
+				rt:        http.DefaultTransport,
+				accessKey: "3fc93fed595063856df3ee1a",
+				secretKey: "1e338744a33426b3394e0ae9cd45af9c4e0d5fee5aad497e969cd21c65963d36",
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got, _ := NewTransport(tt.args.accessKey, tt.args.secretKey, tt.args.options...); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("NewTransport() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

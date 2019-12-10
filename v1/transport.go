@@ -18,7 +18,7 @@ type transport struct {
 	rt        http.RoundTripper
 	accessKey string
 	secretKey string
-	expires   func() string
+	expires   func() string // for testing
 }
 
 func (t *transport) RoundTrip(req *http.Request) (*http.Response, error) {
@@ -63,7 +63,7 @@ func (t *transport) RoundTrip(req *http.Request) (*http.Response, error) {
 	return t.rt.RoundTrip(req)
 }
 
-func NewTransport(accessKey, secretKey string, options ...TransportOption) http.RoundTripper {
+func NewTransport(accessKey, secretKey string, options ...TransportOption) (http.RoundTripper, error) {
 	t := &transport{
 		rt:        http.DefaultTransport,
 		accessKey: accessKey,
@@ -72,7 +72,7 @@ func NewTransport(accessKey, secretKey string, options ...TransportOption) http.
 	for _, option := range options {
 		option(t)
 	}
-	return t
+	return t, nil
 }
 
 func RoundTripper(rt http.RoundTripper) TransportOption {
