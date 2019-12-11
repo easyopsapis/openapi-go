@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package gerr;
+
+import "github.com/easyops-cn/giraffe-micro/codes/code.proto";
+
+option go_package = "github.com/easyopsapis/openapi-go/gerr;gerr";
+
+// EasyOps 状态信息定义
+message Message {
+    // 错误码
+    codes.Code code = 1;
+    // 面向程序员的错误信息, 应为全英文
+    string codeExplain = 2;
+    // 面向终端用户的错误信息, 应用业务语言描述
+    string message = 3;
+    // 兼容旧接口
+    string error = 4;
+    // 兼容旧接口
+    string msg = 5;
+}
