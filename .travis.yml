@@ -1,0 +1,25 @@
+dist: trusty
+
+language: go
+
+env:
+  - GO111MODULE=on
+go:
+  - 1.12.x
+  - master
+git:
+  depth: 1
+os:
+  - linux
+  - osx
+sudo: false
+install: true
+before_script:
+  - go install golang.org/x/tools/cmd/cover
+  - go install github.com/mattn/goveralls
+script:
+  - go test -v -race -tags mock -covermode=atomic -coverprofile=coverage.out ./...
+  - $GOPATH/bin/goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN
+cache:
+  directories:
+    - $GOPATH/pkg/mod # Cache the Go modules
