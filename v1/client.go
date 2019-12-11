@@ -18,7 +18,7 @@ type ClientOption func(*Client)
 func NewClient(address, accessKey, secretKey string, options ...ClientOption) (*Client, error) {
 	c := &Client{Client: &restv2.Client{
 		Client:      &http.Client{},
-		Middleware:  restv2.DefaultMiddleware,
+		Middleware:  &Middleware{restv2.DefaultMiddleware},
 		NameService: restv2.StaticAddress(address),
 	}}
 	for _, option := range options {
