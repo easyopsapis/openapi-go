@@ -12,7 +12,7 @@ import (
 
 const (
 	expiresQueryName   = "expires"
-	accessKeyQueryName = "accessKey"
+	accessKeyQueryName = "accesskey"
 	signatureQueryName = "signature"
 )
 
