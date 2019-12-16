@@ -31,9 +31,11 @@ func TestNewClient(t *testing.T) {
 				Client: &restv2.Client{
 					Client: &http.Client{
 						Transport: &transport{
-							accessKey: "3fc93fed595063856df3ee1a",
-							secretKey: "1e338744a33426b3394e0ae9cd45af9c4e0d5fee5aad497e969cd21c65963d36",
-							rt:        http.DefaultTransport,
+							sig: ApiKey{
+								AccessKey: "3fc93fed595063856df3ee1a",
+								SecretKey: "1e338744a33426b3394e0ae9cd45af9c4e0d5fee5aad497e969cd21c65963d36",
+							},
+							rt: http.DefaultTransport,
 						},
 					},
 					Middleware:  &Middleware{restv2.DefaultMiddleware},
@@ -53,9 +55,11 @@ func TestNewClient(t *testing.T) {
 				Client: &restv2.Client{
 					Client: &http.Client{
 						Transport: &transport{
-							accessKey: "3fc93fed595063856df3ee1a",
-							secretKey: "1e338744a33426b3394e0ae9cd45af9c4e0d5fee5aad497e969cd21c65963d36",
-							rt:        http.DefaultTransport,
+							sig: ApiKey{
+								AccessKey: "3fc93fed595063856df3ee1a",
+								SecretKey: "1e338744a33426b3394e0ae9cd45af9c4e0d5fee5aad497e969cd21c65963d36",
+							},
+							rt: http.DefaultTransport,
 						},
 					},
 					Middleware:  &Middleware{restv2.DefaultMiddleware},

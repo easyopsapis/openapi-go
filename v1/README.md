@@ -1,5 +1,5 @@
 # OpenAPI v1
-## Introduction
+## OpenAPI 签名算法
 ## Usage
 ```go
 package main
