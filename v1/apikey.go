@@ -22,7 +22,7 @@ func (a ApiKey) Sign(r Request) error {
 	}
 	expires := time.Now()
 	t := fmt.Sprintf("%d", expires.Unix())
-	stringToSign := fmt.Sprintf("%ss\n%ss\n%ss", s, t, a.AccessKey)
+	stringToSign := fmt.Sprintf("%s\n%s\n%s", s, t, a.AccessKey)
 	mac := hmac.New(sha1.New, []byte(a.SecretKey))
 	mac.Write([]byte(stringToSign))
 	signature := mac.Sum(nil)

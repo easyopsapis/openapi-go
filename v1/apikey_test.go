@@ -40,7 +40,8 @@ func TestApiKey_Sign(t *testing.T) {
 			},
 			args: args{
 				r: &testRequest{
-					setSignature: func(accessKey, signature string, expires time.Time) {},
+					setSignature: func(accessKey, signature string, expires time.Time) {
+					},
 					stringToSign: func() (s string, err error) {
 						return "GET\n/cmdb/object/list\npage1pageSize30\n\n", nil
 					},
