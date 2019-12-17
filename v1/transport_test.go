@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"reflect"
 	"testing"
+	"time"
 )
 
 type testRoundTripper struct {
@@ -16,11 +17,11 @@ func (t *testRoundTripper) RoundTrip(req *http.Request) (*http.Response, error) 
 }
 
 type testSigner struct {
-	sign func(request Request) error
+	sign func(expires time.Time, request Request) error
 }
 
-func (t testSigner) Sign(request Request) error {
-	return t.sign(request)
+func (t testSigner) Sign(expires time.Time, request Request) error {
+	return t.sign(expires, request)
 }
 
 func TestNewTransport(t *testing.T) {
@@ -78,7 +79,7 @@ func Test_transport_RoundTrip(t1 *testing.T) {
 				rt: &testRoundTripper{roundTrip: func(h *http.Request) (response *http.Response, err error) {
 					return nil, nil
 				}},
-				sig: &testSigner{sign: func(request Request) error {
+				sig: &testSigner{sign: func(expires time.Time, request Request) error {
 					return nil
 				}},
 			},
@@ -89,7 +90,7 @@ func Test_transport_RoundTrip(t1 *testing.T) {
 				rt: &testRoundTripper{roundTrip: func(h *http.Request) (response *http.Response, err error) {
 					return nil, nil
 				}},
-				sig: &testSigner{sign: func(request Request) error {
+				sig: &testSigner{sign: func(expires time.Time, request Request) error {
 					return errors.New("unknown error")
 				}},
 			},

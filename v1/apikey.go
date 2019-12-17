@@ -8,19 +8,18 @@ import (
 )
 
 type Signer interface {
-	Sign(request Request) error
+	Sign(expires time.Time, request Request) error
 }
 
 type ApiKey struct {
 	AccessKey, SecretKey string
 }
 
-func (a ApiKey) Sign(r Request) error {
+func (a ApiKey) Sign(expires time.Time, r Request) error {
 	s, err := r.StringToSign()
 	if err != nil {
 		return err
 	}
-	expires := time.Now()
 	t := fmt.Sprintf("%d", expires.Unix())
 	stringToSign := fmt.Sprintf("%s\n%s\n%s", s, t, a.AccessKey)
 	mac := hmac.New(sha1.New, []byte(a.SecretKey))

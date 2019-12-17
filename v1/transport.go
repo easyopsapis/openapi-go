@@ -2,6 +2,7 @@ package openapi
 
 import (
 	"net/http"
+	"time"
 )
 
 type TransportOption func(*transport)
@@ -12,7 +13,7 @@ type transport struct {
 }
 
 func (t *transport) RoundTrip(req *http.Request) (*http.Response, error) {
-	if err := t.sig.Sign(request{req}); err != nil {
+	if err := t.sig.Sign(time.Now(), request{req}); err != nil {
 		return nil, err
 	}
 	return t.rt.RoundTrip(req)
