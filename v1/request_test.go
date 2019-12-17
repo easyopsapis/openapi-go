@@ -47,7 +47,7 @@ func Test_request_SetSignature(t *testing.T) {
 				expires:   time.Unix(1460314842, 0),
 			},
 			want: &http.Request{
-				URL: &url.URL{RawQuery: "accessKey=3fc93fed595063856df3ee1a&expires=1460314842&signature=e01d1fee0425994caa85a9ff46e6ba1630cea4b7"},
+				URL: &url.URL{RawQuery: "accesskey=3fc93fed595063856df3ee1a&expires=1460314842&signature=e01d1fee0425994caa85a9ff46e6ba1630cea4b7"},
 			},
 		},
 	}
