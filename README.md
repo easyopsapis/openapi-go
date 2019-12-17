@@ -4,3 +4,6 @@
 [![GoDoc](https://godoc.org/github.com/easyopsapis/openapi-go?status.svg)](https://godoc.org/github.com/easyopsapis/openapi-go)
 [![Go Report Card](https://goreportcard.com/badge/github.com/easyopsapis/openapi-go)](https://goreportcard.com/report/github.com/easyopsapis/openapi-go)
 [![LICENSE](https://img.shields.io/github/license/easyopsapis/openapi-go.svg)](https://github.com/easyopsapis/openapi-go/blob/master/LICENSE)
+
+## OpenAPI v1
+[Example](https://github.com/easyopsapis/openapi-go/blob/master/v1/README.md)
