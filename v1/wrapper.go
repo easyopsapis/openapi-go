@@ -17,7 +17,7 @@ func (w *wrapperMiddleware) NewRequest(rule giraffe.HttpRule, in interface{}) (*
 	if err == nil {
 		req.URL.Path = fmt.Sprintf("/%s%s", w.name, req.URL.Path)
 	}
-	return req, nil
+	return req, err
 }
 
 type wrapper struct {

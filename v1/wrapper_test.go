@@ -1,6 +1,7 @@
 package openapi
 
 import (
+	"errors"
 	"github.com/easyops-cn/giraffe-micro"
 	"github.com/easyops-cn/giraffe-micro/plugins/restv2"
 	"net/http"
@@ -104,6 +105,17 @@ func Test_wrapperMiddleware_NewRequest(t *testing.T) {
 				req, _ := http.NewRequest("GET", "/cmdb/api/instance", nil)
 				return req
 			}(),
+		},
+		{
+			fields: fields{
+				name: "cmdb",
+				Middleware: &testMiddleware{
+					newRequest: func(rule giraffe.HttpRule, in interface{}) (request *http.Request, err error) {
+						return nil, errors.New("unknown error")
+					},
+				},
+			},
+			wantErr: true,
 		},
 	}
 	for _, tt := range tests {
