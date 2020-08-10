@@ -2,6 +2,8 @@ github.com/easyops-cn/giraffe-micro v0.6.0 h1:2eZ9JBsaLPrUIr82fv2Wr6Iwiy+WchhssS
 github.com/easyops-cn/giraffe-micro v0.6.0/go.mod h1:7imTe/S8zubQJ88AW9GO+SOqQ3MOniiH6aHrVLkivDg=
 github.com/easyops-cn/go-proto-giraffe v0.1.2 h1:yg1bMWix8Q7kGG4ttHR0CeyF8uzpaVU5+0to7goB+vM=
 github.com/easyops-cn/go-proto-giraffe v0.1.2/go.mod h1:T0Re9wVBu/7qUs/u0NEsmw1q7rTPzP7+bS1lVc+NwGA=
+github.com/easyops-cn/go-proto-giraffe v0.2.0 h1:vLw0ZRMOYi3l2MN8F+cZ4faxhzP511S2TY++zN83ux4=
+github.com/easyops-cn/go-proto-giraffe v0.2.0/go.mod h1:T0Re9wVBu/7qUs/u0NEsmw1q7rTPzP7+bS1lVc+NwGA=
 github.com/go-test/deep v1.0.2 h1:onZX1rnHT3Wv6cqNgYyFOOlgVKJrksuCMCRvJStbMYw=
 github.com/go-test/deep v1.0.2/go.mod h1:wGDj63lr65AM2AQyKZd/NYHGb0R+1RLqB8NKt3aSFNA=
 github.com/gogo/protobuf v0.0.0-20190730201129-28a6bbf47e48/go.mod h1:SlYgWuQ5SjCEi6WLHjHCa1yvBfUnHcTbrrZtXPKa29o=
