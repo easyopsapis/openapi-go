@@ -6,7 +6,7 @@ import (
 
 type StatusError interface {
 	Error() string
-	Status() Status
+	Status() *Status
 }
 
 type statusError status
