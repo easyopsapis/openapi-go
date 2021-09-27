@@ -14,10 +14,10 @@ type statusError status
 func (e *statusError) Error() string {
 	m := (*status)(e).s
 	switch {
-	case m.CodeExplain != "":
-		return m.CodeExplain
 	case m.Error != "":
 		return m.Error
+	case m.CodeExplain != "":
+		return m.CodeExplain
 	case m.Message != "":
 		return m.Message
 	case m.Msg != "":
