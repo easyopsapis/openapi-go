@@ -33,3 +33,14 @@ func WrapClient(name string, client *Client) giraffe.Client {
 		},
 	}
 }
+
+func WrapClientWithScheme(name string, scheme string, client *Client) giraffe.Client {
+	return &wrapper{
+		Client: &restv2.Client{
+			Client:      client.Client.Client,
+			Middleware:  &wrapperMiddleware{name: name, Middleware: client.Client.Middleware},
+			NameService: client.Client.NameService,
+			Scheme:      scheme,
+		},
+	}
+}
