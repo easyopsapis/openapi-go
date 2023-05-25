@@ -135,3 +135,61 @@ func Test_wrapperMiddleware_NewRequest(t *testing.T) {
 		})
 	}
 }
+
+func TestWrapClientWithScheme(t *testing.T) {
+	type args struct {
+		name   string
+		scheme string
+		client *Client
+	}
+	tests := []struct {
+		name string
+		args args
+		want giraffe.Client
+	}{
+		{
+			name: "https",
+			args: args{
+				name:   "cmdb",
+				scheme: "https",
+				client: &Client{
+					Client: &restv2.Client{
+						Client: &http.Client{
+							Transport: &transport{
+								sig: ApiKey{
+									AccessKey: "3fc93fed595063856df3ee1a",
+									SecretKey: "1e338744a33426b3394e0ae9cd45af9c4e0d5fee5aad497e969cd21c65963d36",
+								},
+								rt: http.DefaultTransport,
+							},
+						},
+						Middleware:  restv2.DefaultMiddleware,
+						NameService: restv2.StaticAddress("192.168.100.162:8080"),
+					},
+					transportOptions: []TransportOption{RoundTripper(nil)},
+				},
+			},
+			want: &wrapper{&restv2.Client{
+				Client: &http.Client{
+					Transport: &transport{
+						sig: ApiKey{
+							AccessKey: "3fc93fed595063856df3ee1a",
+							SecretKey: "1e338744a33426b3394e0ae9cd45af9c4e0d5fee5aad497e969cd21c65963d36",
+						},
+						rt: http.DefaultTransport,
+					},
+				},
+				Middleware:  &wrapperMiddleware{name: "cmdb", Middleware: restv2.DefaultMiddleware},
+				NameService: restv2.StaticAddress("192.168.100.162:8080"),
+				Scheme:      "https",
+			}},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := WrapClientWithScheme(tt.args.name, tt.args.scheme, tt.args.client); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("WrapClientWithScheme() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
