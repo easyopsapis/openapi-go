@@ -76,6 +76,16 @@ func Test_request_StringToSign(t *testing.T) {
 		wantErr bool
 	}{
 		{
+			name: "url部分存在中文、符号等需要url转码的内容",
+			fields: fields{
+				Request: func() *http.Request {
+					req, _ := http.NewRequest(http.MethodGet, "http://127.0.0.1/cmdb/object/你好?page=1&pageSize=30", nil)
+					return req
+				}(),
+			},
+			want: "GET\n/cmdb/object/%E4%BD%A0%E5%A5%BD\npage1pageSize30\n\n",
+		},
+		{
 			fields: fields{
 				Request: func() *http.Request {
 					req, _ := http.NewRequest(http.MethodGet, "http://127.0.0.1/cmdb/object/list?page=1&pageSize=30", nil)

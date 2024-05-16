@@ -35,7 +35,7 @@ func (r request) SetSignature(accessKey, signature string, expires time.Time) {
 
 func (r request) StringToSign() (string, error) {
 	verb := strings.ToUpper(r.Method)
-	path := r.URL.Path
+	path := r.URL.EscapedPath()
 	query := r.URL.Query()
 	query.Del(expiresQueryName)
 	query.Del(accessKeyQueryName)
